@@ -12,26 +12,31 @@ using com.IvanMurzak.McpPlugin;
 namespace com.IvanMurzak.Godot.MCP.Dialogic
 {
     /// <summary>
-    /// Sample MCP tool family for the Dialogic Tools extension (tool ids prefixed
-    /// <c>dialogic-*</c>). A tool family is one <c>[AiToolType]</c> <c>partial class</c>;
-    /// each tool method (<c>[AiTool("&lt;name&gt;")]</c> + <c>[Description]</c>) lives in its own
-    /// partial-class file. This is the SAME authoring model as Unity-MCP and the core Godot-MCP addon —
-    /// ReflectorNet reflects the attributes, McpPlugin's assembly scanner auto-discovers the family
-    /// once the package's source compiles into the consumer's Godot project (no registry edit needed).
+    /// MCP tool family for the <b>Dialogic Tools</b> extension (tool ids prefixed <c>dialogic-*</c>) — a
+    /// <b>CLASS-B (addon-dependent)</b> extension that authors the community
+    /// <a href="https://github.com/dialogic-godot/dialogic">Dialogic</a> addon's <b>timeline</b> (<c>.dtl</c>)
+    /// and <b>character</b> (<c>.dch</c>) resources. Dialogic's types are NOT in GodotSharp, so the package
+    /// references them ONLY by string name (resolved + driven at runtime through the editor-only
+    /// <see cref="AddonInterop"/>) and never takes a compile-time dependency on the addon. Every editor tool
+    /// is <b>presence-gated</b>: when Dialogic is absent the tool returns a clean structured
+    /// <c>Installed: false</c> result with an install hint instead of crashing.
     ///
     /// <para>
-    /// <b>Pure-managed vs editor-only.</b> Split tools by what API they touch, exactly like the core addon:
+    /// <b>Pure-managed vs editor-only.</b> Tools are split by the API they touch, exactly like the core addon
+    /// and the Class-A <c>Godot-AI-Particles</c> example:
     /// <list type="bullet">
     ///   <item>
-    ///     Tools with NO Godot native API surface (this file's <c>Echo</c>) stay OUTSIDE <c>#if TOOLS</c>
-    ///     so they compile in any consumer build AND are CI-unit-testable (no Godot binary required —
-    ///     a plain xUnit host can construct the class and call the method).
+    ///     Tools with NO Godot native API (<c>dialogic-defaults</c>, in <c>Runtime/Tools/</c>) plus the
+    ///     value-logic cores (<c>Runtime/Dialogic/</c>: the timeline text format, color normalization, the
+    ///     addon name/member CONSTANTS, the <see cref="AddonGateResult"/> shape) stay OUTSIDE <c>#if TOOLS</c>
+    ///     so they compile in any consumer build AND are CI-unit-testable with no Godot binary.
     ///   </item>
     ///   <item>
-    ///     Tools that touch the Godot editor (<c>EditorInterface</c>, live <c>Node</c>/<c>Resource</c>)
-    ///     live behind <c>#if TOOLS</c> (see <c>../../Editor/Tools/Tool_Dialogic.EditorInfo.cs</c>),
-    ///     so they are excluded from an exported game build, and they marshal onto the editor main thread
-    ///     via <c>MainThread.Instance.Run(...)</c> — NEVER touch Godot objects off-thread.
+    ///     Tools that drive the editor (<c>dialogic-timeline-create</c>, <c>-character-create</c>,
+    ///     <c>-timeline-add-text</c>, <c>-get</c>, in <c>Editor/Tools/</c>) and the dynamic addon resolver
+    ///     (<c>Runtime/Interop/AddonInterop.cs</c>) live behind <c>#if TOOLS</c> and marshal every Godot call
+    ///     onto the editor main thread via <c>MainThread.Instance.Run(...)</c> — verified by the headless-Godot
+    ///     E2E (the addon is referenced by string name only, so the constants are the contract).
     ///   </item>
     /// </list>
     /// </para>
