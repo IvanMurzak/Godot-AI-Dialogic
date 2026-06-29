@@ -118,10 +118,24 @@ jobs:
       #   ADDON_TAG  — the RELEASE TAG to pin (never @latest — keeps the leg reproducible).
       #   ADDON_DIR  — the folder name under testbed/addons/ the addon installs into.
       #   ADDON_KIND — "gdscript" (class_name addon; a copy is enough) or "gdextension" (needs a linux .so).
-      ADDON_REPO: ""
-      ADDON_TAG: ""
-      ADDON_DIR: ""
-      ADDON_KIND: ""
+      #
+      # CLASS-B: Dialogic (dialogic-godot/dialogic). A pure-GDScript class_name addon, pinned to the 2.0
+      # line. The download step copies addons/dialogic/ into testbed/addons/dialogic/ before --import, so the
+      # addon's class_name resource types (DialogicTimeline/DialogicCharacter) register in the global script
+      # class list and their auto-registered ResourceFormatSavers become active — which is all this
+      # extension's RESOURCE-LEVEL tools need.
+      #
+      # NOTE (deliberate): the testbed project.godot does NOT enable Dialogic's editor plugin and does NOT
+      # bake the `Dialogic` autoload. These tools author/read SAVED RESOURCES (.dtl/.dch) by path, never
+      # create live Dialogic NODES, so they need neither the runtime autoload nor the editor plugin (the
+      # class_name types + auto-registered savers come from --import alone). Enabling Dialogic's editor plugin
+      # would instantiate its full MainPanel UI headless (preload of uid://...) and risk the same
+      # "Cannot open file" boot-assert failure the PhantomCamera plugin hit. If a FUTURE node-creating tool is
+      # added, bake the autoload + plugin then.
+      ADDON_REPO: "dialogic-godot/dialogic"
+      ADDON_TAG: "2.0-alpha-19"
+      ADDON_DIR: "dialogic"
+      ADDON_KIND: "gdscript"
     steps:
       - uses: actions/checkout@v6
 

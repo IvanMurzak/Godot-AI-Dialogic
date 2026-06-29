@@ -42,10 +42,10 @@ level** (timelines / characters), not Dialogic's game-runtime API.
 
 | Tool | Kind | Description |
 | --- | --- | --- |
-| `dialogic-defaults` | pure-managed | Recommended starter timeline + character description. No addon needed. |
-| `dialogic-create-character` | editor | Create + save a `DialogicCharacter` resource (`.dch`). |
-| `dialogic-create-timeline` | editor | Create + save a `DialogicTimeline` resource (`.dtl`) with starter text events. |
-| `dialogic-add-event` | editor | Append an event (text / character / choice) to an existing timeline. |
-| `dialogic-get-timeline` | editor | List the events in a timeline resource (read-only). |
+| `dialogic-defaults` | pure-managed | Recommended starter timeline + character config. No addon needed. |
+| `dialogic-timeline-create` | editor | Create + save a `DialogicTimeline` resource (`.dtl`) seeded with a text event. |
+| `dialogic-character-create` | editor | Create + save a `DialogicCharacter` resource (`.dch`) (display name, color, description). |
+| `dialogic-timeline-add-text` | editor | Append a text event (optional speaking character) to an existing timeline. |
+| `dialogic-get` | editor | Read a timeline (`.dtl`) or character (`.dch`) resource's config (read-only). |
 
 License: Apache-2.0.
