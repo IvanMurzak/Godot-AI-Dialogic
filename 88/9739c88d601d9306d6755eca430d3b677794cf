@@ -1,0 +1,38 @@
+tests/Godot-AI-Dialogic.Tests/DialogicGateTests.cs
+  s_e3cea916442b5e::t_486daf35079109 1-71
+tests/Godot-AI-Dialogic.Tests/Tool_Dialogic_DefaultsTests.cs
+  s_e3cea916442b5e::t_3cbfaeec4b463b 1-66
+tests/Godot-AI-Dialogic.Tests/DialogicTimelineTextTests.cs
+  s_e3cea916442b5e::t_ba4b62f9a7587b 40-41
+  s_e3cea916442b5e::t_7d8827fd94695a 1-39,42-77
+tests/Godot-AI-Dialogic.Tests/DialogicResourceKindTests.cs
+  s_e3cea916442b5e::t_d3cacdf66b8d2d 1-48
+tests/Godot-AI-Dialogic.Tests/DialogicColorTests.cs
+  s_e3cea916442b5e::t_44fd3243e72407 1-47
+tests/Godot-AI-Dialogic.Tests/Godot-AI-Dialogic.Tests.csproj
+  s_b86b4256d14aec::t_6ee9d8dd91b8f3 39-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "889739c88d601d9306d6755eca430d3b677794cf",
+  "prompts": {},
+  "sessions": {
+    "s_b86b4256d14aec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-af8f1901c29c0282f",
+        "model": "unknown"
+      },
+      "human_author": "Ivan Murzak <Ivan.D.Murzak@gmail.com>"
+    },
+    "s_e3cea916442b5e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c575ab56-73e6-4952-bb8b-fef415924e27",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Ivan Murzak <Ivan.D.Murzak@gmail.com>"
+    }
+  }
+}
