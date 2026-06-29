@@ -36,7 +36,15 @@
   -->
   <ItemGroup>
     <Compile Include="..\..\src\Godot-AI-Dialogic\Runtime\Tools\Tool_Dialogic.cs" Link="Source\Tool_Dialogic.cs" />
-    <Compile Include="..\..\src\Godot-AI-Dialogic\Runtime\Tools\Tool_Dialogic.Echo.cs" Link="Source\Tool_Dialogic.Echo.cs" />
+    <Compile Include="..\..\src\Godot-AI-Dialogic\Runtime\Tools\Tool_Dialogic.Ids.cs" Link="Source\Tool_Dialogic.Ids.cs" />
+    <Compile Include="..\..\src\Godot-AI-Dialogic\Runtime\Tools\Tool_Dialogic.Defaults.cs" Link="Source\Tool_Dialogic.Defaults.cs" />
+    <Compile Include="..\..\src\Godot-AI-Dialogic\Runtime\Dialogic\DialogicAddon.cs" Link="Source\DialogicAddon.cs" />
+    <Compile Include="..\..\src\Godot-AI-Dialogic\Runtime\Dialogic\AddonGateResult.cs" Link="Source\AddonGateResult.cs" />
+    <Compile Include="..\..\src\Godot-AI-Dialogic\Runtime\Dialogic\DialogicResourceInfo.cs" Link="Source\DialogicResourceInfo.cs" />
+    <Compile Include="..\..\src\Godot-AI-Dialogic\Runtime\Dialogic\DialogicResourceKind.cs" Link="Source\DialogicResourceKind.cs" />
+    <Compile Include="..\..\src\Godot-AI-Dialogic\Runtime\Dialogic\DialogicColor.cs" Link="Source\DialogicColor.cs" />
+    <Compile Include="..\..\src\Godot-AI-Dialogic\Runtime\Dialogic\DialogicTimelineText.cs" Link="Source\DialogicTimelineText.cs" />
+    <Compile Include="..\..\src\Godot-AI-Dialogic\Runtime\Dialogic\DialogicDefaults.cs" Link="Source\DialogicDefaults.cs" />
   </ItemGroup>
 
 </Project>
