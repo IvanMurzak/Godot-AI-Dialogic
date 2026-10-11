@@ -13,8 +13,7 @@ Dialogic is a third-party GDScript addon whose classes are NOT in GodotSharp, an
 on it:
 
 - **No compile-time dependency.** Reference Dialogic classes **by string name only**, resolved at runtime.
-  `dotnet build -c Debug` MUST exit 0 with the addon ABSENT (the no-dependency gate; CI also asserts the
-  nuspec).
+  `dotnet build -c Debug` MUST exit 0 with the addon ABSENT (the no-dependency gate).
 - **Resolution:** Dialogic registers GDScript `class_name` types in the **global script-class list**, not
   `ClassDB`: resolve via `ProjectSettings.GetGlobalClassList()` + `GD.Load`. `ClassDB.ClassExists` returns
   `false` for a `class_name` type even when installed (the #1 trap).
@@ -60,15 +59,14 @@ the most version-volatile of the Class-B addons, so keep the family to create / 
 
 ## Tools
 
-Ids live in `Runtime/Tools/Tool_Dialogic.Ids.cs` (the source of truth). Each tool is one partial-class file
-named after it: pure-managed under `Runtime/Tools/`, editor tools under `Editor/Tools/`. Current tools:
-`dialogic-defaults` (pure-managed), `dialogic-timeline-create`, `dialogic-character-create`,
-`dialogic-timeline-add-text`, `dialogic-get`.
+Ids live in `Runtime/Tools/Tool_Dialogic.Ids.cs` (the source of truth). Current tools: `dialogic-defaults`
+(pure-managed), `dialogic-timeline-create`, `dialogic-character-create`, `dialogic-timeline-add-text`,
+`dialogic-get`.
 
 ## Build / test (no Godot binary, addon absent)
 
 ```bash
-dotnet build src/Godot-AI-Dialogic/Godot-AI-Dialogic.csproj  # source-only package compiles tools (addon NOT needed)
+dotnet build src/Godot-AI-Dialogic/Godot-AI-Dialogic.csproj  # source-only package compiles tools
 dotnet test  tests/Godot-AI-Dialogic.Tests/Godot-AI-Dialogic.Tests.csproj
 dotnet pack  src/Godot-AI-Dialogic/Godot-AI-Dialogic.csproj -p:Version=0.0.0-ci -o local-nuget
 dotnet build testbed/Dialogic-Testbed.csproj                 # consumes the local package (injection proof)
@@ -86,7 +84,7 @@ testbed, or you silently build the stale cached source.
 - Root namespace `com.IvanMurzak.Godot.MCP.Dialogic`. Every `.cs` starts with the Apache-2.0 header.
 - Pure-managed code (tool ids, the `AddonGateResult` shape, name/enum-int constants, defaults) → `Runtime/`
   (outside `#if TOOLS`, unit-testable); editor-driving tools + `AddonInterop` → `#if TOOLS` (every Godot call
-  via `MainThread.Instance.Run(...)`, presence gate first, E2E-verified).
+  via `MainThread.Instance.Run(...)`, E2E-verified).
 - The package declares ONLY the `com.IvanMurzak.McpPlugin` / `com.IvanMurzak.ReflectorNet` min-version deps;
   **GodotSharp and the Dialogic addon must never become a package dependency** (CI asserts the nuspec). Keep
   the MCP pins in lockstep with the core Godot-MCP addon; bump with `commands/update-core.ps1`.
